@@ -33,26 +33,28 @@ function updateIcon() {
 }
 
 // Scroll Suave para links de navegação
-document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-  anchor.addEventListener("click", function (e) {
-    e.preventDefault();
-    const targetId = this.getAttribute("href");
-    if (targetId === "#") return;
+document
+  .querySelectorAll('header .nav-link[href^="#"], .hero-buttons a[href^="#"]')
+  .forEach((anchor) => {
+    anchor.addEventListener("click", function (e) {
+      e.preventDefault();
+      const targetId = this.getAttribute("href");
+      if (targetId === "#") return;
 
-    const targetElement = document.querySelector(targetId);
-    if (targetElement) {
-      const headerOffset = 80;
-      const elementPosition = targetElement.getBoundingClientRect().top;
-      const offsetPosition =
-        elementPosition + window.pageYOffset - headerOffset;
+      const targetElement = document.querySelector(targetId);
+      if (targetElement) {
+        const headerOffset = 80;
+        const elementPosition = targetElement.getBoundingClientRect().top;
+        const offsetPosition =
+          elementPosition + window.pageYOffset - headerOffset;
 
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth",
-      });
-    }
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth",
+        });
+      }
+    });
   });
-});
 
 // Intersection Observer para animações ao scroll
 const observerOptions = {
@@ -349,3 +351,63 @@ document.addEventListener("keydown", (e) => {
     nextImage();
   }
 });
+
+// Preencher cards de projetos com dados de projectsData
+function populateProjectCards() {
+  if (typeof projectsData === "undefined") return;
+
+  const cards = document.querySelectorAll(".project-card");
+
+  cards.forEach((card) => {
+    const projectId = card.getAttribute("data-project");
+    const project = projectsData[projectId];
+    if (!project) return;
+
+    // Título
+    const titleEl = card.querySelector(".card-header h3");
+    if (titleEl) {
+      titleEl.textContent = project.title;
+    }
+
+    // Descrição breve
+    const descriptionEl = card.querySelector("p");
+    if (descriptionEl) {
+      descriptionEl.textContent =
+        project.shortDescription || project.description;
+    }
+
+    // Link do GitHub no card
+    const githubLink = card.querySelector(".project-links a");
+    if (githubLink && project.github) {
+      githubLink.href = project.github;
+    }
+
+    // Imagem de capa do card
+    const placeholderEl = card.querySelector(".project-placeholder");
+    if (placeholderEl && Array.isArray(project.images) && project.images[0]) {
+      placeholderEl.style.backgroundImage = `url(${project.images[0]})`;
+      placeholderEl.style.backgroundSize = "cover";
+      placeholderEl.style.backgroundPosition = "center";
+      placeholderEl.style.backgroundRepeat = "no-repeat";
+    }
+
+    // Tecnologias no card
+    const techStackEl = card.querySelector(".tech-stack");
+    if (techStackEl && Array.isArray(project.technologies)) {
+      techStackEl.innerHTML = "";
+      project.technologies.forEach((tech) => {
+        const span = document.createElement("span");
+        span.className = "tech-badge";
+        span.textContent = tech;
+        techStackEl.appendChild(span);
+      });
+    }
+  });
+}
+
+// Garantir que os cards sejam populados após o carregamento da página
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", populateProjectCards);
+} else {
+  populateProjectCards();
+}
