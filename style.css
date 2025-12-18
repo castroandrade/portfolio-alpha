@@ -368,6 +368,7 @@ p {
 .tech-badge:hover {
   border-color: var(--text-primary);
   color: var(--text-primary);
+  cursor: default;
 }
 
 /* SKILLS SECTION */
