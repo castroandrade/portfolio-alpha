@@ -1,16 +1,26 @@
-const projectsDataExample = {
+const projectsData = {
   1: {
-    title: "Nome do Projeto",
+    title: "Sistema de Gestão Patrimonial com Rastreamento RFID via IoT",
     description:
-      "Descrição detalhada do projeto usando tecnologias X, Y e Z. Este projeto foi desenvolvido com foco em performance e experiência do usuário, utilizando as melhores práticas de desenvolvimento web moderno. A aplicação oferece uma interface intuitiva e responsiva, garantindo uma experiência fluida em todos os dispositivos.",
-    technologies: ["HTML", "CSS", "JavaScript"],
+      "Aplicação web para o gerenciamento de ativos corporativos, focada na automação através de IoT. O sistema permite o cadastro, movimentação e baixa de bens patrimoniais de forma automatizada através da leitura de tags RFID.",
+    technologies: [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "Python",
+      "Django",
+      "SQLite",
+      "RFID",
+      "IoT",
+      "ChartJS",
+    ],
     images: [
       "assets/images/projects/projeto-1/image-1.jpg",
       "assets/images/projects/projeto-1/image-2.jpg",
       "assets/images/projects/projeto-1/image-3.jpg",
     ],
-    demo: "https://exemplo-demo.com",
-    github: "https://github.com/usuario/projeto-1",
+    github:
+      "https://github.com/castroandrade/Sistema-Web-para-Gestao-de-Patrimonio-com-Django",
   },
   2: {
     title: "Projeto Exemplo",
@@ -23,7 +33,6 @@ const projectsDataExample = {
       "assets/images/projects/projeto-2/image-3.jpg",
       "assets/images/projects/projeto-2/image-4.jpg",
     ],
-    demo: "https://exemplo-demo.com",
     github: "https://github.com/usuario/projeto-2",
   },
   3: {
@@ -35,9 +44,6 @@ const projectsDataExample = {
       "assets/images/projects/projeto-3/image-1.jpg",
       "assets/images/projects/projeto-3/image-2.jpg",
     ],
-    demo: "https://exemplo-demo.com",
     github: "https://github.com/usuario/projeto-3",
   },
 };
-
-

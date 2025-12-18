@@ -192,36 +192,7 @@ window.addEventListener("scroll", requestParallaxTick, { passive: true });
 // Inicializa parallax
 updateParallax();
 
-// DADOS DOS PROJETOS
-const projectsData = {
-  1: {
-    title: "Nome do Projeto",
-    description:
-      "Descrição detalhada do projeto usando tecnologias X, Y e Z. Este projeto foi desenvolvido com foco em performance e experiência do usuário, utilizando as melhores práticas de desenvolvimento web moderno. A aplicação oferece uma interface intuitiva e responsiva, garantindo uma experiência fluida em todos os dispositivos.",
-    technologies: ["HTML", "CSS", "JavaScript"],
-    images: [1, 2, 3],
-    demo: "#",
-    github: "#",
-  },
-  2: {
-    title: "Projeto Exemplo",
-    description:
-      "Outro projeto interessante desenvolvido com tecnologias modernas. Este projeto demonstra habilidades avançadas em desenvolvimento full-stack, com integração de APIs, gerenciamento de estado e otimizações de performance. A arquitetura foi pensada para escalabilidade e manutenibilidade.",
-    technologies: ["React", "TypeScript", "Node.js"],
-    images: [1, 2, 3, 4],
-    demo: "#",
-    github: "#",
-  },
-  3: {
-    title: "Mais um Projeto",
-    description:
-      "Projeto focado em performance e experiência do usuário. Desenvolvido com atenção aos detalhes de UX/UI, este projeto oferece uma experiência excepcional aos usuários. Implementa técnicas avançadas de otimização e segue padrões de acessibilidade web.",
-    technologies: ["Vue.js", "Python", "PostgreSQL"],
-    images: [1, 2],
-    demo: "#",
-    github: "#",
-  },
-};
+// Os dados são carregados do arquivo data/projects-data.js
 
 // MODAL DE PROJETO
 const modal = document.getElementById("project-modal");
@@ -275,7 +246,6 @@ function openModal(projectId) {
   document.getElementById("modal-title").textContent = project.title;
   document.getElementById("modal-description-text").textContent =
     project.description;
-  document.getElementById("modal-demo").href = project.demo;
   document.getElementById("modal-github").href = project.github;
 
   // Atualizar tecnologias
