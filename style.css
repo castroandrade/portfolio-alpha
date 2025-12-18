@@ -617,21 +617,6 @@ body.dark .view-project-btn {
 .project-placeholder {
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    135deg,
-    var(--surface-color) 0%,
-    var(--border-color) 100%
-  );
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-}
-
-.project-placeholder::before {
-  content: "📱";
-  font-size: 3rem;
-  opacity: 0.3;
 }
 
 .card-header {
@@ -1151,7 +1136,7 @@ section {
   max-width: 900px;
   width: 100%;
   max-height: 90vh;
-  overflow-y: auto;
+  overflow: hidden; /* mantém as bordas arredondadas mesmo com scroll interno */
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
   transform: scale(0.9) translateY(20px);
   transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -1188,7 +1173,7 @@ section {
 }
 
 .modal-header {
-  padding: 40px 40px 20px;
+  padding: 40px 80px 20px 40px; /* espaço extra à direita para não colidir com o botão de fechar */
   border-bottom: 1px solid var(--border-color);
   display: flex;
   justify-content: space-between;
@@ -1231,6 +1216,8 @@ section {
 
 .modal-body {
   padding: 30px 40px 40px;
+  max-height: calc(90vh - 120px); /* altura total do modal menos header */
+  overflow-y: auto;
 }
 
 .modal-image-carousel {
