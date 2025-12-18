@@ -56,14 +56,24 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
 
 // Intersection Observer para animações ao scroll
 const observerOptions = {
-  threshold: 0.1,
-  rootMargin: "0px 0px -50px 0px",
+  threshold: 0.15,
+  rootMargin: "0px 0px -80px 0px",
 };
 
 const observer = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
     if (entry.isIntersecting) {
       entry.target.classList.add("animate");
+
+      // Adiciona delay escalonado para cards em grid
+      if (
+        entry.target.classList.contains("project-card") ||
+        entry.target.classList.contains("skill-card")
+      ) {
+        const siblings = Array.from(entry.target.parentElement.children);
+        const index = siblings.indexOf(entry.target);
+        entry.target.style.transitionDelay = `${index * 0.1}s`;
+      }
     }
   });
 }, observerOptions);
@@ -71,6 +81,26 @@ const observer = new IntersectionObserver((entries) => {
 // Observa todos os elementos com data-animate
 document.querySelectorAll("[data-animate]").forEach((el) => {
   observer.observe(el);
+});
+
+// Observer para seções completas
+const sectionObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("section-enter");
+      }
+    });
+  },
+  {
+    threshold: 0.2,
+    rootMargin: "0px 0px -100px 0px",
+  }
+);
+
+// Observa todas as seções
+document.querySelectorAll("section").forEach((section) => {
+  sectionObserver.observe(section);
 });
 
 // Highlight de seção ativa no menu
@@ -101,3 +131,38 @@ window.addEventListener("scroll", highlightActiveSection);
 
 // Atualiza na carga inicial
 highlightActiveSection();
+
+// Efeito Parallax nas formas de background
+let ticking = false;
+
+function updateParallax() {
+  const scrollY = window.pageYOffset;
+  const shapes = document.querySelectorAll(".shape");
+
+  shapes.forEach((shape, index) => {
+    const speed = (index + 1) * 0.2;
+    const yPos = -(scrollY * speed);
+    const xPos = Math.sin(scrollY * 0.0008) * 30 * (index + 1);
+
+    // Mantém a animação CSS base e adiciona parallax
+    if (shape.classList.contains("shape-3")) {
+      shape.style.transform = `translate(calc(-50% + ${xPos}px), calc(-50% + ${yPos}px))`;
+    } else {
+      shape.style.transform = `translate(${xPos}px, ${yPos}px)`;
+    }
+  });
+
+  ticking = false;
+}
+
+function requestParallaxTick() {
+  if (!ticking) {
+    window.requestAnimationFrame(updateParallax);
+    ticking = true;
+  }
+}
+
+window.addEventListener("scroll", requestParallaxTick, { passive: true });
+
+// Inicializa parallax
+updateParallax();
