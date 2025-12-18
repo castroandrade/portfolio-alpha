@@ -15,11 +15,13 @@ const projectsData = {
       "RFID",
       "IoT",
       "ChartJS",
+      "MQTT",
+      "Django Bootstrap",
     ],
     images: [
-      "assets/images/projects/projeto-1/image-1.jpg",
-      "assets/images/projects/projeto-1/image-2.jpg",
-      "assets/images/projects/projeto-1/image-3.jpg",
+      "assets/images/projects/rfid-django/logo.png",
+      "assets/images/projects/rfid-django/dashboard.png",
+      "assets/images/projects/rfid-django/CRUD.png",
     ],
     github:
       "https://github.com/castroandrade/Sistema-Web-para-Gestao-de-Patrimonio-com-Django",
@@ -40,6 +42,7 @@ const projectsData = {
       "JavaScript",
     ],
     images: [
+      "assets/images/projects/ilearn/logo.png",
       "assets/images/projects/ilearn/login.png",
       "assets/images/projects/ilearn/checkout.png",
       "assets/images/projects/ilearn/catalogo.png",
@@ -47,16 +50,16 @@ const projectsData = {
     github: "https://github.com/castroandrade/ilearn-django",
   },
   3: {
-    title: "Mais um Projeto",
+    title: "Refil Sustentável - ESC 2025",
     shortDescription:
-      "Interface focada em UX/UI e acessibilidade, priorizando performance e experiência do usuário.",
+      "Solução IoT de Vending Machine para líquidos a granel. Integra hardware (BitDogLab) e pagamentos via Pix em tempo real para automação de dispensers.",
     description:
-      "Projeto focado em performance e experiência do usuário. Desenvolvido com atenção aos detalhes de UX/UI, este projeto oferece uma experiência excepcional aos usuários. Implementa técnicas avançadas de otimização e segue padrões de acessibilidade web.",
-    technologies: ["Vue.js", "Python", "PostgreSQL"],
+      "Projeto desenvolvido para a Embedded Systems Competition (ESC) 2025. Trata-se de um sistema completo para automação de venda de produtos a granel (como produtos de limpeza), visando a redução de plásticos. O sistema opera em arquitetura multitarefa (não-bloqueante) no microcontrolador Raspberry Pi Pico W.",
+    technologies: ["C++", "Arduino", "Raspberry Pi", "HTML", "CSS", "API"],
     images: [
-      "assets/images/projects/projeto-3/image-1.jpg",
-      "assets/images/projects/projeto-3/image-2.jpg",
+      "assets/images/projects/refil-sustentavel/logo.png",
+      "assets/images/projects/refil-sustentavel/menu.png",
     ],
-    github: "https://github.com/usuario/projeto-3",
+    github: "https://github.com/castroandrade/Refil-Sustentavel-ESC2025",
   },
 };
