@@ -199,7 +199,7 @@ const projectsData = {
     description:
       "Descrição detalhada do projeto usando tecnologias X, Y e Z. Este projeto foi desenvolvido com foco em performance e experiência do usuário, utilizando as melhores práticas de desenvolvimento web moderno. A aplicação oferece uma interface intuitiva e responsiva, garantindo uma experiência fluida em todos os dispositivos.",
     technologies: ["HTML", "CSS", "JavaScript"],
-    images: [1, 2, 3], // Números para placeholders, pode substituir por URLs
+    images: [1, 2, 3],
     demo: "#",
     github: "#",
   },
@@ -292,14 +292,23 @@ function openModal(projectId) {
   carouselTrack.innerHTML = "";
   carouselIndicators.innerHTML = "";
 
-  project.images.forEach((imgIndex, index) => {
+  project.images.forEach((imagePath, index) => {
     // Slide
     const slide = document.createElement("div");
     slide.className = "carousel-slide";
 
-    const placeholder = document.createElement("div");
-    placeholder.className = "project-placeholder";
-    slide.appendChild(placeholder);
+    // Se for string (caminho de imagem), criar img tag
+    // Se for número, usar placeholder
+    if (typeof imagePath === "string") {
+      const img = document.createElement("img");
+      img.src = imagePath;
+      img.alt = `${project.title} - Imagem ${index + 1}`;
+      slide.appendChild(img);
+    } else {
+      const placeholder = document.createElement("div");
+      placeholder.className = "project-placeholder";
+      slide.appendChild(placeholder);
+    }
 
     carouselTrack.appendChild(slide);
 

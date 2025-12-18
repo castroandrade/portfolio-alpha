@@ -500,7 +500,7 @@ body.dark .project-card:hover {
 }
 
 .view-project-btn {
-  color: white;
+  color: var(--bg-color);
   font-weight: 600;
   font-size: 1.1rem;
   padding: 12px 24px;
@@ -508,6 +508,14 @@ body.dark .project-card:hover {
   border-radius: 8px;
   transform: translateY(10px);
   transition: transform 0.3s ease;
+  border: 2px solid var(--bg-color);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+body.dark .view-project-btn {
+  color: var(--text-primary);
+  background: var(--bg-color);
+  border-color: var(--text-primary);
 }
 
 .project-image:hover .view-project-btn {
@@ -590,7 +598,6 @@ body.dark .project-card:hover {
 .tech-badge:hover {
   border-color: var(--text-primary);
   color: var(--text-primary);
-  cursor: default;
 }
 
 /* SKILLS SECTION */
