@@ -74,4 +74,16 @@ const projectsData = {
     ],
     github: "https://github.com/castroandrade/segmentacao-clientes-kmeans",
   },
+  5: {
+    title: "Análise de Fraude em Cartão de Crédito",
+    shortDescription:
+      "Análise Exploratória de Dados (EDA) focada em transações financeiras. Investigação estatística e visual para identificar padrões de comportamento fraudulento em datasets desbalanceados..",
+    description:
+      "Este projeto foca na Análise Exploratória de Dados (EDA) de um dataset real de transações bancárias. O objetivo principal foi 'interrogar' os dados para entender como as fraudes se distinguem das transações legítimas, preparando o terreno para futuros modelos de detecção.",
+    technologies: ["Python", "Pandas", "Matplotlib", "Seaborn", "Scikit-learn", "K-Means"],
+    images: [
+      "assets/images/projects/kmeans-fraud/logo.png",
+    ],
+    github: "https://github.com/castroandrade/analise-fraudes",
+  },
 };
