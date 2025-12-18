@@ -74,16 +74,20 @@
             <h2 data-animate>Projetos</h2>
             <div class="projects-grid">
                 <!-- Card 1 -->
-                <article class="card project-card" data-animate>
-                    <div class="project-image">
+                <article class="card project-card" data-animate data-project="1">
+                    <div class="project-image" data-clickable>
                         <div class="project-placeholder"></div>
+                        <div class="project-overlay">
+                            <span class="view-project-btn">Ver Detalhes</span>
+                        </div>
                     </div>
                     <div class="card-header">
                         <h3>Nome do Projeto</h3>
                         <div class="project-links">
-                            <a href="#" target="_blank" aria-label="Ver demo"><i class="ph ph-arrow-square-out"></i></a>
-                            <a href="#" target="_blank" aria-label="Ver código no GitHub"><i
-                                    class="ph ph-github-logo"></i></a>
+                            <a href="#" target="_blank" aria-label="Ver demo" onclick="event.stopPropagation()"><i
+                                    class="ph ph-arrow-square-out"></i></a>
+                            <a href="#" target="_blank" aria-label="Ver código no GitHub"
+                                onclick="event.stopPropagation()"><i class="ph ph-github-logo"></i></a>
                         </div>
                     </div>
                     <p>Descrição breve do projeto usando tecnologias X, Y e Z.</p>
@@ -94,16 +98,20 @@
                     </div>
                 </article>
                 <!-- Card 2 -->
-                <article class="card project-card" data-animate>
-                    <div class="project-image">
+                <article class="card project-card" data-animate data-project="2">
+                    <div class="project-image" data-clickable>
                         <div class="project-placeholder"></div>
+                        <div class="project-overlay">
+                            <span class="view-project-btn">Ver Detalhes</span>
+                        </div>
                     </div>
                     <div class="card-header">
                         <h3>Projeto Exemplo</h3>
                         <div class="project-links">
-                            <a href="#" target="_blank" aria-label="Ver demo"><i class="ph ph-arrow-square-out"></i></a>
-                            <a href="#" target="_blank" aria-label="Ver código no GitHub"><i
-                                    class="ph ph-github-logo"></i></a>
+                            <a href="#" target="_blank" aria-label="Ver demo" onclick="event.stopPropagation()"><i
+                                    class="ph ph-arrow-square-out"></i></a>
+                            <a href="#" target="_blank" aria-label="Ver código no GitHub"
+                                onclick="event.stopPropagation()"><i class="ph ph-github-logo"></i></a>
                         </div>
                     </div>
                     <p>Outro projeto interessante desenvolvido com tecnologias modernas.</p>
@@ -114,16 +122,20 @@
                     </div>
                 </article>
                 <!-- Card 3 -->
-                <article class="card project-card" data-animate>
-                    <div class="project-image">
+                <article class="card project-card" data-animate data-project="3">
+                    <div class="project-image" data-clickable>
                         <div class="project-placeholder"></div>
+                        <div class="project-overlay">
+                            <span class="view-project-btn">Ver Detalhes</span>
+                        </div>
                     </div>
                     <div class="card-header">
                         <h3>Mais um Projeto</h3>
                         <div class="project-links">
-                            <a href="#" target="_blank" aria-label="Ver demo"><i class="ph ph-arrow-square-out"></i></a>
-                            <a href="#" target="_blank" aria-label="Ver código no GitHub"><i
-                                    class="ph ph-github-logo"></i></a>
+                            <a href="#" target="_blank" aria-label="Ver demo" onclick="event.stopPropagation()"><i
+                                    class="ph ph-arrow-square-out"></i></a>
+                            <a href="#" target="_blank" aria-label="Ver código no GitHub"
+                                onclick="event.stopPropagation()"><i class="ph ph-github-logo"></i></a>
                         </div>
                     </div>
                     <p>Projeto focado em performance e experiência do usuário.</p>
@@ -222,6 +234,60 @@
             <p>&copy; 2025 José Henrique. Todos os direitos reservados.</p>
         </div>
     </footer>
+
+    <!-- MODAL DE PROJETO -->
+    <div id="project-modal" class="project-modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <button class="modal-close" aria-label="Fechar modal">
+                <i class="ph ph-x"></i>
+            </button>
+
+            <div class="modal-header">
+                <h2 id="modal-title">Nome do Projeto</h2>
+                <div class="modal-links">
+                    <a href="#" id="modal-demo" target="_blank" class="modal-link">
+                        <i class="ph ph-arrow-square-out"></i> Demo
+                    </a>
+                    <a href="#" id="modal-github" target="_blank" class="modal-link">
+                        <i class="ph ph-github-logo"></i> GitHub
+                    </a>
+                </div>
+            </div>
+
+            <div class="modal-body">
+                <div class="modal-image-carousel">
+                    <button class="carousel-btn carousel-prev" aria-label="Imagem anterior">
+                        <i class="ph ph-caret-left"></i>
+                    </button>
+                    <div class="carousel-container">
+                        <div class="carousel-track" id="carousel-track">
+                            <!-- Imagens serão inseridas via JavaScript -->
+                        </div>
+                    </div>
+                    <button class="carousel-btn carousel-next" aria-label="Próxima imagem">
+                        <i class="ph ph-caret-right"></i>
+                    </button>
+                    <div class="carousel-indicators" id="carousel-indicators">
+                        <!-- Indicadores serão inseridos via JavaScript -->
+                    </div>
+                </div>
+
+                <div class="modal-info">
+                    <div class="modal-description">
+                        <h3>Descrição</h3>
+                        <p id="modal-description-text">Descrição detalhada do projeto...</p>
+                    </div>
+                    <div class="modal-tech">
+                        <h3>Tecnologias</h3>
+                        <div class="modal-tech-stack" id="modal-tech-stack">
+                            <!-- Tecnologias serão inseridas via JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
