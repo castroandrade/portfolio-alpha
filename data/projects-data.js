@@ -62,4 +62,16 @@ const projectsData = {
     ],
     github: "https://github.com/castroandrade/Refil-Sustentavel-ESC2025",
   },
+  4: {
+    title: "Segmentação de Clientes com K-Means",
+    shortDescription:
+      "Aplicação de Machine Learning não supervisionado para agrupar clientes em perfis de consumo, permitindo estratégias de marketing personalizadas baseadas em renda e pontuação de gastos.",
+    description:
+      "Este projeto utiliza técnicas de Data Science e Machine Learning Não Supervisionado para transformar dados brutos de um shopping center em insights estratégicos. Através do algoritmo K-Means (otimizado via Método do Cotovelo), identifiquei 5 clusters comportamentais distintos baseados na relação entre Renda Anual e Score de Gastos.",
+    technologies: ["Python", "Pandas", "Matplotlib", "Seaborn", "Scikit-learn", "K-Means"],
+    images: [
+      "assets/images/projects/kmeans-clients/logo.png",
+    ],
+    github: "https://github.com/castroandrade/segmentacao-clientes-kmeans",
+  },
 };

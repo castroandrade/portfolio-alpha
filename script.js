@@ -208,15 +208,15 @@ const carouselNext = document.querySelector(".carousel-next");
 let currentImageIndex = 0;
 let currentProjectId = null;
 
-// Abrir modal ao clicar no card ou na imagem
-document.querySelectorAll(".project-card").forEach((card) => {
-  card.addEventListener("click", (e) => {
-    // Não abrir se clicar nos links
-    if (e.target.closest("a")) return;
+window.addEventListener("click", (e) => {
+  const card = e.target.closest(".project-card");
+  if (!card) return;
 
-    const projectId = card.getAttribute("data-project");
-    openModal(projectId);
-  });
+  // Não abrir se clicar em um link dentro do card
+  if (e.target.closest("a")) return;
+
+  const projectId = card.getAttribute("data-project");
+  openModal(projectId);
 });
 
 // Fechar modal
@@ -352,49 +352,79 @@ document.addEventListener("keydown", (e) => {
   }
 });
 
-// Preencher cards de projetos com dados de projectsData
-function populateProjectCards() {
+// Renderizar cards de projetos a partir de projectsData
+function renderProjectCards() {
   if (typeof projectsData === "undefined") return;
 
-  const cards = document.querySelectorAll(".project-card");
+  const grid = document.querySelector(".projects-grid");
+  if (!grid) return;
 
-  cards.forEach((card) => {
-    const projectId = card.getAttribute("data-project");
-    const project = projectsData[projectId];
-    if (!project) return;
+  grid.innerHTML = "";
 
-    // Título
-    const titleEl = card.querySelector(".card-header h3");
-    if (titleEl) {
-      titleEl.textContent = project.title;
+  Object.entries(projectsData).forEach(([projectId, project]) => {
+    const card = document.createElement("article");
+    card.className = "card project-card";
+    card.setAttribute("data-animate", "");
+    card.setAttribute("data-project", projectId);
+
+    const projectImage = document.createElement("div");
+    projectImage.className = "project-image";
+    projectImage.setAttribute("data-clickable", "");
+
+    const placeholder = document.createElement("div");
+    placeholder.className = "project-placeholder";
+
+    // Imagem de capa do card (primeira imagem do projeto)
+    if (Array.isArray(project.images) && project.images[0]) {
+      placeholder.style.backgroundImage = `url(${project.images[0]})`;
+      placeholder.style.backgroundSize = "cover";
+      placeholder.style.backgroundPosition = "center";
+      placeholder.style.backgroundRepeat = "no-repeat";
     }
 
-    // Descrição breve
-    const descriptionEl = card.querySelector("p");
-    if (descriptionEl) {
-      descriptionEl.textContent =
-        project.shortDescription || project.description;
-    }
+    const overlay = document.createElement("div");
+    overlay.className = "project-overlay";
 
-    // Link do GitHub no card
-    const githubLink = card.querySelector(".project-links a");
-    if (githubLink && project.github) {
-      githubLink.href = project.github;
-    }
+    const viewBtn = document.createElement("span");
+    viewBtn.className = "view-project-btn";
+    viewBtn.textContent = "Ver Detalhes";
 
-    // Imagem de capa do card
-    const placeholderEl = card.querySelector(".project-placeholder");
-    if (placeholderEl && Array.isArray(project.images) && project.images[0]) {
-      placeholderEl.style.backgroundImage = `url(${project.images[0]})`;
-      placeholderEl.style.backgroundSize = "cover";
-      placeholderEl.style.backgroundPosition = "center";
-      placeholderEl.style.backgroundRepeat = "no-repeat";
-    }
+    overlay.appendChild(viewBtn);
+    projectImage.appendChild(placeholder);
+    projectImage.appendChild(overlay);
 
-    // Tecnologias no card
-    const techStackEl = card.querySelector(".tech-stack");
-    if (techStackEl && Array.isArray(project.technologies)) {
-      techStackEl.innerHTML = "";
+    const cardHeader = document.createElement("div");
+    cardHeader.className = "card-header";
+
+    const titleEl = document.createElement("h3");
+    titleEl.textContent = project.title;
+
+    const linksEl = document.createElement("div");
+    linksEl.className = "project-links";
+
+    const githubLink = document.createElement("a");
+    githubLink.href = project.github || "#";
+    githubLink.target = "_blank";
+    githubLink.rel = "noopener noreferrer";
+    githubLink.setAttribute("aria-label", "Ver código no GitHub");
+    githubLink.onclick = (e) => e.stopPropagation();
+
+    const githubIcon = document.createElement("i");
+    githubIcon.className = "ph ph-github-logo";
+
+    githubLink.appendChild(githubIcon);
+    linksEl.appendChild(githubLink);
+
+    cardHeader.appendChild(titleEl);
+    cardHeader.appendChild(linksEl);
+
+    const descriptionEl = document.createElement("p");
+    descriptionEl.textContent = project.shortDescription || project.description;
+
+    const techStackEl = document.createElement("div");
+    techStackEl.className = "tech-stack";
+
+    if (Array.isArray(project.technologies)) {
       project.technologies.forEach((tech) => {
         const span = document.createElement("span");
         span.className = "tech-badge";
@@ -402,12 +432,24 @@ function populateProjectCards() {
         techStackEl.appendChild(span);
       });
     }
+
+    card.appendChild(projectImage);
+    card.appendChild(cardHeader);
+    card.appendChild(descriptionEl);
+    card.appendChild(techStackEl);
+
+    grid.appendChild(card);
+
+    // Garantir que o IntersectionObserver anime os novos cards
+    if (typeof observer !== "undefined") {
+      observer.observe(card);
+    }
   });
 }
 
-// Garantir que os cards sejam populados após o carregamento da página
+// Garantir que os cards sejam renderizados após o carregamento da página
 if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", populateProjectCards);
+  document.addEventListener("DOMContentLoaded", renderProjectCards);
 } else {
-  populateProjectCards();
+  renderProjectCards();
 }
